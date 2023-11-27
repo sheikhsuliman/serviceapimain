@@ -1,0 +1,1 @@
+alter table main_task alter column company_id drop NOT NULL;

@@ -1,0 +1,6 @@
+Trade;Chapter;Variant;Section;Main Task;Sub Task;Trade name;Chapter name;Variant name;Section name;Position name;Description;Unit
+102;;;;;;Trade 102;;;;;;
+102;0;;;;;Trade 102;Chapter 0;;;;;
+102;0;30;;;;Trade 102;Chapter 0;Variant 30;;;;
+102;0;30;31;;;Trade 102;Chapter 0;Variant 30;Section 31;;;
+102;0;30;31;100;;Trade 102;Chapter 0;Variant 30;Section 31 typo;Position 100;;

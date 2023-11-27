@@ -1,0 +1,4 @@
+UPDATE permission
+    SET deprecated = false
+    WHERE name in ('PROJECT_TEAM_CHANGE_ADMIN_ROLE', 'PROJECT_TEAM_CHANGE_NON_ADMIN_ROLE')
+;

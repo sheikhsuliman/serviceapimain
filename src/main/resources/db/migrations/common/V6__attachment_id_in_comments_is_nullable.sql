@@ -1,0 +1,1 @@
+ALTER TABLE comment ALTER COLUMN attachment_id DROP NOT NULL;

@@ -1,0 +1,3 @@
+ALTER TABLE main_task
+    ADD COLUMN template BOOLEAN NOT NULL DEFAULT FALSE
+;

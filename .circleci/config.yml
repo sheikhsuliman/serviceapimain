@@ -1,0 +1,279 @@
+version: 2.1
+jobs:
+  build_maven:
+    environment:
+      # Configure the JVM and Maven to avoid OOM errors
+      _JAVA_OPTIONS: "-Xmx3g"
+      MAVEN_OPTS: "-Xmx3g --illegal-access=permit -Djava.awt.headless=true"
+    working_directory: ~/swisscon-service-api
+    docker:
+      - image: circleci/openjdk:11.0.8-jdk
+      - image: postgres:10.6-alpine
+        environment:
+          POSTGRES_DB: swisscon
+    steps:
+      - checkout
+      - jq/install
+
+      - run:
+          name: Halt if FlyWay version conflict
+          command: . ./scripts/ci-validate-flyway-versions.sh
+
+      - run:
+          name: Save Release
+          command: |
+            . ./scripts/ci-release.sh > ./ci-release
+            echo "Release: $( cat ./ci-release )"
+
+      - restore_cache:
+          keys:
+            - swisscon-service-api-{{ checksum "pom.xml" }}-v2
+            - swisscon-service-api- # used if checksum fails
+
+      - run:
+          name: Wait for Postgres DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Maven Install and Test with Postgres DB
+          command: export ENVIRONMENT=local && ./mvnw clean install --batch-mode -nsu -P postgresql
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: swisscon-service-api-{{ checksum "pom.xml" }}-v2
+
+      - store_test_results:
+          path: target/test-results
+
+      - store_artifacts:
+          path: ~/test-results/unit-tests
+
+      - store_artifacts:
+          path: ~/test-results/integration-tests
+
+      - persist_to_workspace:
+          root: ~/swisscon-service-api
+          paths:
+            - ./scripts
+            - ./Dockerfile
+            - ./src/main/resources
+            - ./ci-release
+            - ./target/classes
+            - ./target/dependency-jars
+
+  build_docker:
+    working_directory: ~/swisscon-service-api
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - run:
+          name: Get Release
+          command: echo 'export RELEASE=$( cat ./ci-release )' >> $BASH_ENV
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - attach_workspace:
+          at:  ~/swisscon-service-api
+
+      - run:
+          name: Login to private Docker Repository
+          command: docker login https://$DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
+
+      - run:
+          name: Build Docker Container and Push it to $DOCKER_REGISTRY
+          command: |
+            docker build -t swisscon-service-api:$RELEASE .
+            docker save --output swisscon-service-api.tar swisscon-service-api:$RELEASE
+            docker tag swisscon-service-api:$RELEASE $DOCKER_REGISTRY/sc/swisscon-service-api:$RELEASE
+            docker push $DOCKER_REGISTRY/sc/swisscon-service-api:$RELEASE
+      - persist_to_workspace:
+          root: ~/swisscon-service-api
+          paths:
+            - swisscon-service-api.tar
+            - ci-release
+
+
+  deploy_to_k8:
+    parameters:
+      stack:
+        description: "dev/stage/prod"
+        type: string
+
+    working_directory: ~/swisscon-service-api
+
+    docker:
+      - image: circleci/python:3.7
+
+    steps:
+      - attach_workspace:
+          at:  ~/swisscon-service-api
+
+      - run:
+          name: Get Release
+          command: echo 'export RELEASE=$( cat ./ci-release )' >> $BASH_ENV
+
+      - setup_remote_docker:
+          name: Setup Remote Docker
+          docker_layer_caching: true
+
+      - run:
+          name: Login to private Docker Repository
+          command: docker login https://$DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASS
+
+      - run:
+          name: Deploy to stack
+          command: |
+            docker pull registry.siryus.com/sc/api-deployer-master:stable
+            docker run \
+              -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+              -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+              -e STACK="<< parameters.stack >>" \
+              -e RELEASE="${RELEASE}" \
+              registry.siryus.com/sc/api-deployer-master:stable
+
+      - slack/status:
+          fail_only: false
+          success_message: "Siryus Back End ${RELEASE} Was Deployed To << parameters.stack >>"
+          webhook: ${SLACK_HOOK_URL}
+
+  run_sc_it:
+    parameters:
+      stack:
+        description: "dev/stage/prod"
+        type: string
+
+    working_directory: ~/swisscon-service-api
+
+    docker:
+      - image: cimg/base:2020.01
+
+    steps:
+      - setup_remote_docker:
+          name: Setup Remote Docker
+          docker_layer_caching: true
+
+      - run:
+          name: Login to private Docker Repository
+          command: docker login https://$DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+      - run:
+          name: Run sc-it
+          command: |
+            docker pull registry.siryus.com/sc/sc-it:stable
+            docker run -e SERVER_URL=https://api.<< parameters.stack >>.siryus.com registry.siryus.com/sc/sc-it:stable
+
+  tag_image_as_stable:
+    working_directory: ~/swisscon-service-api
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/swisscon-service-api
+      - run:
+          name: Login to private Docker Repository
+          command: docker login https://$DOCKER_REGISTRY -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run:
+          name: Tag docker image as stable and push to registry
+          command: |
+            export RELEASE=$( cat ./ci-release )
+            docker load < swisscon-service-api.tar
+            docker tag swisscon-service-api:$RELEASE $DOCKER_REGISTRY/sc/swisscon-service-api:stable
+            docker push $DOCKER_REGISTRY/sc/swisscon-service-api:stable
+
+orbs:
+  slack: circleci/slack@3.4.2
+  jq: circleci/jq@2.0.1
+
+workflows:
+  version: 2.1
+  commit:
+    jobs:
+      - build_maven:
+          context: siryus
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
+
+      - build_docker:
+          context: siryus
+          requires:
+            - build_maven
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
+
+      - deploy_to_k8:
+          name: deploy_to_dev
+          context: siryus
+          stack: dev
+          requires:
+            - build_docker
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
+
+      - run_sc_it:
+          name: run_sc_it_on_dev
+          context: siryus
+          stack: dev
+          requires:
+            - deploy_to_dev
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /^v.*/
+
+      - deploy_to_k8:
+          name: master_to_stage
+          context: siryus
+          stack: stage
+          requires:
+            - run_sc_it_on_dev
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+
+      - tag_image_as_stable:
+          context: siryus
+          requires:
+            - master_to_stage
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
+      - approve_prod:
+          type: approval
+          requires:
+            - master_to_stage
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
+      - deploy_to_k8:
+          name: deploy_to_prod
+          context: siryus
+          stack: prod
+          requires:
+            - approve_prod
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/

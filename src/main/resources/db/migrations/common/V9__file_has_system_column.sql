@@ -1,0 +1,3 @@
+ALTER TABLE file 
+    ADD COLUMN "system" BOOLEAN NOT NULL DEFAULT false;
+

@@ -1,0 +1,1429 @@
+{
+	"info": {
+		"_postman_id": "ad84db34-c896-4e1d-b1dd-d8c0f2077783",
+		"name": "Tasks Related APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Catalog Calls",
+			"item": [
+				{
+					"name": "List Catalog All Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+								"exec": [
+									"    "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/catalog/listAll",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"catalog",
+								"listAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Catalog Roots",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/catalog/listRoots",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"catalog",
+								"listRoots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Catalog Children",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/catalog/listChildren/12056",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"catalog",
+								"listChildren",
+								"12056"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Catalog Like SNP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/catalog/listLike?snpLike=99",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"catalog",
+								"listLike"
+							],
+							"query": [
+								{
+									"key": "snpLike",
+									"value": "99"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Catalog Like Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/catalog/listLike?nameLike=Paint",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"catalog",
+								"listLike"
+							],
+							"query": [
+								{
+									"key": "nameLike",
+									"value": "Paint"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Catalog Like SNP and Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/catalog/listLike?snpLike=39&nameLike=Brush",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"catalog",
+								"listLike"
+							],
+							"query": [
+								{
+									"key": "snpLike",
+									"value": "39"
+								},
+								{
+									"key": "nameLike",
+									"value": "Brush"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Project Calls",
+			"item": [
+				{
+					"name": "Invite member to company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Some\",\n\t\"lastName\": \"Block\",\n\t\"email\": \"a@b.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/invite",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail to Invite, Duplicate e-mail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Some\",\n\t\"lastName\": \"Block\",\n\t\"email\": \"a@b.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/invite",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fail to Invite, null e-mail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Some\",\n\t\"lastName\": \"Block\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/invite",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Location Calls",
+			"item": [
+				{
+					"name": "List location Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Expanded (root)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/location/1/expanded",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"location",
+								"1",
+								"expanded"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Expanded (level 1)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/location/2/expanded",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"location",
+								"2",
+								"expanded"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Expanded (level 2)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/location/444/expanded",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"location",
+								"444",
+								"expanded"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Expanded (level 3)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/location/464/expanded",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"location",
+								"464",
+								"expanded"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Team Calls",
+			"item": [
+				{
+					"name": "List available users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tasks/task/1/available-users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"task",
+								"1",
+								"available-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List main task team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tasks/task/1/available-users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"task",
+								"1",
+								"available-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user to main task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tasks/task/1/add-user/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"task",
+								"1",
+								"add-user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Checklist",
+			"item": [
+				{
+					"name": "Add Checklist item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"Do things\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tasks/check-list/main-task/1/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"check-list",
+								"main-task",
+								"1",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Another Checklist item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"Do other things\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tasks/check-list/main-task/1/add",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"check-list",
+								"main-task",
+								"1",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check first checlist item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"Do other things\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/tasks/check-list/2/on",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"check-list",
+								"2",
+								"on"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Checklist from Main Task 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/tasks/check-list/main-task/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"tasks",
+								"check-list",
+								"main-task",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/rest/auth/login?username=test.albin-borer-ag.ch@siryus.com&password=cocoTest6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"rest",
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "test.albin-borer-ag.ch@siryus.com"
+						},
+						{
+							"key": "password",
+							"value": "cocoTest6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Init",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/auth/init",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"auth",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Location",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3649858b-b78a-4b48-874a-aaf8f7531904",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"locationId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Top location\",\n    \"projectId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/location/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"location",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create subLocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3649858b-b78a-4b48-874a-aaf8f7531904",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Sub location\",\n    \"parent\" : 1144,\n    \"projectId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/location/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"location",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Main Tasks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/location/{{locationId}}/tasks",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"location",
+						"{{locationId}}",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creat Main Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae112b09-329b-4252-981e-54b02bc01a83",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"taskId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"locationId\": {{locationId}},\n\t\"companyCatalogItem\" : {\n\t\t\"snpNumber\": \"120567\",\n\t\t\"companyId\": \"1\",\n\t\t\"companyDetails\" : \"First put base paint layer on\",\n\t\t\"price\": \"8.5\",\n\t\t\"unit\": \"m2\"\n\t},\n\t\"specification\": {\n\t\t\"variation\": \"42 cm wide\",\n\t\t\"amount\": \"2.0\",\n\t\t\"price\": \"8.0\"\n\t},\n\t\"title\": \"Install Sliding Door\",\n\t\"description\": \"Install Sliding Door for Walk In Clothet\",\n\t\"startDate\": \"2020-01-01T12:00:00\",\n\t\"dueDate\": \"2020-02-01T12:00:00\",\n\t\"timeBudgetMinutes\": 120\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tasks/task",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fail to Creat Main Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae112b09-329b-4252-981e-54b02bc01a83",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"reason contains LOCATION\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.reason).to.contains(\"LOCATION\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"locationId\": 666666,\n\t\"companyCatalogItem\" : {\n\t\t\"snpNumber\": \"120567\",\n\t\t\"companyId\": \"1\",\n\t\t\"companyDetails\" : \"First put base paint layer on\",\n\t\t\"price\": \"8.5\",\n\t\t\"unit\": \"m2\"\n\t},\n\t\"specification\": {\n\t\t\"variation\": \"42 cm wide\",\n\t\t\"amount\": \"2.0\",\n\t\t\"price\": \"8.0\"\n\t},\n\t\"title\": \"Install Sliding Door\",\n\t\"description\": \"Install Sliding Door for Walk In Clothet\",\n\t\"deadline\": \"2020-01-01T12:00:00\",\n\t\"timeBudgetMinutes\": 120\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tasks/task",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Main Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/task/{{taskId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"task",
+						"{{taskId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Main Tasks Again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/location/{{locationId}}/tasks",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"location",
+						"{{locationId}}",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List SubTasks of Main Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/task/{{taskId}}/sub-tasks",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"task",
+						"{{taskId}}",
+						"sub-tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creat Sub Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae112b09-329b-4252-981e-54b02bc01a83",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"subTaskId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mainTaskId\": {{taskId}},\n\t\"title\": \"Install Sliding Door\",\n\t\"description\": \"Install Sliding Door for Walk In Clothet\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tasks/sub-task",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"sub-task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sub Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/sub-task/{{subTaskId}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"sub-task",
+						"{{subTaskId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List SubTasks of Main Task Again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/task/{{taskId}}/sub-tasks",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"task",
+						"{{taskId}}",
+						"sub-tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Main Tasks For Project",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afedb569-4bcb-4669-9a2c-0066414999d4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"locationIDs\": [],\n\t\"snpIDs\": [],\n\t\"companyIDs\": [],\n\t\"tradeIDs\": [],\n\t\"userID\" : null,\n\t\"status\" : \"ANY\",\n\t\"fromDate\": \"2019-01-01T12:00:00\",\n\t\"toDate\": \"2021-01-01T12:00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/tasks/project/{{projectId}}/tasks",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"project",
+						"{{projectId}}",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Sub Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/sub-task/{{subTaskId}}/delete",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"sub-task",
+						"{{subTaskId}}",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Main Task",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/tasks/task/{{taskId}}/delete",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"tasks",
+						"task",
+						"{{taskId}}",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Start Time",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mainTaskId\" : {{taskId}},\n\t\"comment\" : \"Hello Task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/work-log/start-timer",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"work-log",
+						"start-timer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log Stop Time",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mainTaskId\" : {{taskId}},\n\t\"comment\" : \"Buy Task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/work-log/stop-timer",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"work-log",
+						"stop-timer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Complete Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mainTaskId\" : {{taskId}},\n\t\"comment\" : \"Buy Task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/work-log/complete-task",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"work-log",
+						"complete-task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Approve Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mainTaskId\" : {{taskId}},\n\t\"comment\" : \"Buy Task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/work-log/approve-task",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"work-log",
+						"approve-task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reject Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mainTaskId\" : {{taskId}},\n\t\"comment\" : \"Buy Task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/work-log/approve-task",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"work-log",
+						"approve-task"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "575e0bed-ae68-4c37-a4e5-41ed9fd8c622",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c9fb6b3a-aed3-4455-8d2c-53681262f3c3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "bab32b00-d0db-40d2-8c95-cfd5ce0e4aaa",
+			"key": "baseURL",
+			"value": "http://localhost:8080/api/rest",
+			"type": "string"
+		},
+		{
+			"id": "59f93347-47f4-4a85-89e3-b11c3dd2fcfd",
+			"key": "locationId",
+			"value": 1144,
+			"type": "number"
+		},
+		{
+			"id": "06c29fdd-64bd-4cfc-bda3-8b472bdb5cdb",
+			"key": "taskId",
+			"value": 7,
+			"type": "number"
+		},
+		{
+			"id": "aabc7f66-a84f-4121-958d-9dc98571be75",
+			"key": "subTaskId",
+			"value": 9,
+			"type": "number"
+		},
+		{
+			"id": "24cdf65b-5d13-4dff-ab6e-15d11cd342c8",
+			"key": "projectId",
+			"value": "1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,4 @@
+DELETE FROM file;
+INSERT INTO file (id, reference_type, reference_id, filename, created_by, created, last_modified_by, last_modified, disabled, length, mime_type, url, url_medium, url_small, system) VALUES
+    (3,'USER',1,'user_1_profile_picture',1,'2019-05-03 15:18:22.349000000',1,'2019-05-03 15:18:22.349000000',null,2255599,'image/jpeg','https://${aws_namecard_bucket}.s3.eu-central-1.amazonaws.com/File/973/profile_picture.jpg','https://${aws_namecard_bucket}.s3.eu-central-1.amazonaws.com/File/973/profile_picture_800x800.png','https://${aws_namecard_bucket}.s3.eu-central-1.amazonaws.com/File/973/profile_picture_128x128.png', false)
+;

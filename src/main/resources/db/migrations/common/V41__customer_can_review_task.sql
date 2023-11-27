@@ -1,0 +1,1 @@
+select grantpermissionstorole('PROJECT_CUSTOMER', ARRAY [ 'TASK_REVIEW']);

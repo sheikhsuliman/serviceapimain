@@ -1,0 +1,12 @@
+Trade;Chapter;Variant;Section;Main Task;Sub Task;Trade name;Chapter name;Variant name;Section name;Position name;Description;Unit
+102;;;;;;Trade 102;;;;;;
+102;0;;;;;Trade 102;Chapter 0;;;;;
+102;0;30;;;;Trade 102;Chapter 0;Variant 30;;;;
+102;0;30;31;;;Trade 102;Chapter 0;Variant 30;Section 31;;;
+102;0;30;31;100;;Trade 102;Chapter 0;Variant 30;Section 31;Position 100;;
+102;0;30;31;100;1;Trade 102;Chapter 0;Variant 30;Section 31;Position 100.1;Description;FP
+102;0;30;31;100;2;Trade 102;Chapter 0;Variant 30;Section 31;Position 100.2;Description 2;FP
+102;0;80;;;;Trade 102;Chapter 0;Variant 80;;;;
+102;0;80;31;;;Trade 102;Chapter 0;Variant 80;Section 31;;;
+102;0;80;31;100;;Trade 102;Chapter 0;Variant 80;Section 31;Position 100;;
+102;0;30;31;100;1;Trade 102;Chapter 0;Variant 80;Section 31;Position 100.1;Description with äöüÄÖÜ;FP

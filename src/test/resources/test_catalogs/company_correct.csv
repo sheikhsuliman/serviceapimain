@@ -1,0 +1,5 @@
+Trade;Chapter;Variant;Section;Main Task;Sub Task;Trade name;Chapter name;Variant name;Section name;Position name;Description;Unit;Company Active;Company Checklist;Company Price;Company Task;Company Sub Task;Company Unit
+102;0;30;31;100;1;Trade 102;Chapter 0;Variant 30;Section 31;Position 100;Description;FP;1;item_a, item_b;12.5;Overriden Task_1;Overriden Sub Task_1;m2
+102;0;30;31;100;2;Trade 102;Chapter 0;Variant 30;Section 31;Position 100;Description 2;FP;1;a  ,  b , c;5;;;m3
+102;0;30;31;100;3;Trade 102;Chapter 0;Variant 30;Section 31;Position 100;Description 3;FP;0;;;;Overriden Sub Task_3;
+102;0;80;31;100;1;Trade 102;Chapter 0;Variant 80;Section 31;Position 100;Description 4;FP;1;;3.62;Overriden Task_4;;

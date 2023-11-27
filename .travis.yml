@@ -1,0 +1,8 @@
+env:
+  - BUILD_COMMAND="./mvnw install"
+
+language: java
+jdk:
+  - oraclejdk8
+
+script: (eval "$BUILD_COMMAND")
